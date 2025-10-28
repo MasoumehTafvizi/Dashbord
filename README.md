@@ -8,6 +8,26 @@ you can do this by running the following command:
 ```
 pip install -r requirements.txt
 ```
+
+Then run the following command to start the export environment variables in main repo directory:
+
+```source .env
+```
+
+Run 'export PYTHONPATH=${PWD}' to add the current directory to the PYTHONPATH.
+
+
+Build Django migrations by running the following command:
+
+``` python src/manage.py makemigrations db
+    python src/manage.py migrate
+```
+
+
+Then apply the migrations by running the following command:
+```
+
+
 Then you can run the dashboard by running the following command:
 
 ```
