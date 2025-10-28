@@ -1,17 +1,17 @@
+import os
 import streamlit as st
 import pandas as pd
-import json 
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
 
-try:
-    from stringio import StringIO
-except ImportError:
-    from io import StringIO
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+from db.models import Message
 
 #Login form
 
@@ -75,3 +75,24 @@ with st.expander("User profile: "):
     col2.text_input("Location:", key="location")
     st.camera_input("Take a picture", key="camera")
 
+
+# Questions
+with st.expander("Q / A"):
+    query = st.text_input('Search:')
+    
+    
+    # select top 10 from messages 
+    for msg in Message.objects.all().order_by('-date'):
+        
+        if not msg.text or msg.text[-1] not in '?':
+            continue
+        if query and query not in msg.text:
+            continue
+        
+        col1, col2 = st.columns([1, 6])
+        col1.write(f'**{msg.user.username}**')
+        col2.write(msg.text)
+        
+    col1, col2 = st.columns(2)
+    col1.button('< Previous')
+    col2.button('Next >')
