@@ -12,7 +12,10 @@ Then run the following command to start the export environment variables in main
 source .env
 ```
 
-Run `export PYTHONPATH=${PWD}` to add the current directory to the python path.
+Then run the foollowing command to add the current directory to the python path:
+```
+export PYTHONPATH=${PWD}
+``` 
 
 Build Django migrations by running the following command:
 ``` 
